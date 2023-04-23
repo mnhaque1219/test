@@ -1,0 +1,201 @@
+\documentclass[journal,transmag,onecolumn]{IEEEtran}
+\usepackage{cite}
+\ifCLASSINFOpdf
+\else
+\usepackage[dvips]{graphicx}
+\fi
+\usepackage{amsmath,ragged2e,color,amsmath, amsthm, amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{array}
+\usepackage{subfig}
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+\begin{document}
+
+\title{Organic Scintillator detector (CsI) design for Neutrino detection }
+
+\author{\IEEEauthorblockN{Md Nurul Haque^{*}\IEEEauthorrefmark{}}
+\IEEEauthorblockA{\IEEEauthorrefmark{}Project Timeline: Spring 2023}
+\IEEEauthorblockA{\IEEEauthorrefmark{}Instructor: Dr. Jing Liu^{**}}
+\IEEEauthorblockA{\IEEEauthorrefmark{}^{*}Department of Physics, South Dakota School of Mines and Technology, SD, USA}
+\IEEEauthorblockA{\IEEEauthorrefmark{}Email: mdnurul.haque@mines.sdsmt.edu}
+\IEEEauthorblockA{\IEEEauthorrefmark{}Course No : PHYS 350}
+\thanks{}}
+
+\IEEEtitleabstractindextext{
+}
+% make the title area
+\maketitle
+\IEEEdisplaynontitleabstractindextext
+\IEEEpeerreviewmaketitle
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The muon is one of Nature’s fundamental particles. Its discovery in 1937 by Carl Anderson marked a radical departure in
+physicists' understanding of the building blocks of matter. Although it was first assigned a place in theory of nuclear
+forces which was incorrect, it is now understood to be an important member of the lepton family of particles.
+
+The muon is produced copiously in Earth’s atmosphere by interactions between cosmic rays and atmospheric air molecules,
+and its flux at sea level is sufficient for investigations. Cosmic ray proton interact with atmospheric nuclei and create pions,
+which decay into muons within short distance as meters.
+The dominant muon decay model (sometime called Michel decay) is a $3$-body decay model. A muon decay
+into an electron, electron anti-neutrino, and muon neutrino.
+
+\begin{eqnarray}
+&&\hspace*{0.0cm} \pi^+(u\bar{d})\rightarrow \nu_{\mu}+\mu^+,
+\label{1eq:1}\\
+&&\hspace*{0.0cm} \pi^-(d\bar{u})\rightarrow \bar{\nu_{\mu}}+\mu^-,
+\label{1eq:2}\\
+&&\hspace*{0.0cm} \mu^+\rightarrow e^++\nu_e+\bar{\nu_{\mu}},
+\label{1eq:3}\\
+&&\hspace*{0.0cm} \mu^-\rightarrow e^-+\nu_{\mu}+\bar{\nu_e},
+\label{1eq:4}
+\end{eqnarray}
+
+The muon’s lifetime can be measured using experimental techniques common to nuclear and particle physics. The stopping rate of
+muons, as a function of depth in the atmosphere, can be used as a demonstration of the time dilation effect of special relativity.
+Since the decay times of individual radioactive particles are randomly distributed, they are a convenient source of genuinely
+random numbers. These can be used to demonstrate common probability distributions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Instrument AND EXPERIMENTAL SETUP}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h!]
+  \centering
+  \subfloat[]{\includegraphics[width=90mm, height=70mm]{a.eps}}
+   \hfill
+  \subfloat[]{\includegraphics[width=90mm, height=70mm]{b.eps}}
+  \caption{(a) Block diagram for Muon Hardware (Ref: \textit{www.teachspin.com/muon-physics}); (b) full experimental setup from Dr. Juergen Reichenbacher's laboratory. }
+  \label{1Fig:F1}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \subfloat[]{\includegraphics[width=90mm, height=70mm]{1a.eps}}
+   \hfill
+   \subfloat[]{\includegraphics[width=90mm, height=70mm]{1b.eps}}
+  \caption{Recorded histograms for 186 muon-decay events (Michel electrons). (a) Raw data directly collected from the PC; (b) mean muon lifetime of $(1.915\pm 0.214)
+  ~\mu s$ after simple fitting (eq. 5) and a constant background of $86.71\pm 10.98$.}
+  \label{1Fig:F2}
+\end{figure}
+\subsection{The Hardware}
+Figure 1a shows the block diagram for muon hardware.
+The complete instrument has three hardware components: a detector, readout electronics and user-supplied
+personal computer (PC). Control and data acquisition software are also included.
+
+\subsection{Detector Module}
+A $16.5~cm$ diameter by $36~cm$ tall black anodized aluminum cylinder houses the entire detector module
+including the plastic scintillator, photomultiplier tube (PMT), and high voltage supply (HV) as well
+as electronics for an imbedded light emitting diode (LED). The scintillator, a right circular cylinder,
+is optically coupled to a single $5~cm$ diameter 10-stage PMT. Because all of the circuitry for
+the PMT is mounted inside the aluminum cylinder, there are no exposed HV electrodes. The HV is
+manually controlled and monitored by external controls. The thickness of the scintillator assures that
+either muon passage through or decay within the scintillator produces a quantity of light well
+above the PMT threshold. The imbedded LED can be driven by the adjustable pulser to mimic muon
+decays and to test the readout electronics. Inside the aluminum cylinder, light tight wrapping on
+both the scintillator and PMT prevent light leaks.
+
+\subsection{Electronics Module}
+The electronics module houses all electronics needed to run the experiment. Connections on the front
+panel allow us not only to examine the PMT signal itself, but also to monitor that signal as it moves
+along the readout chain. PMT pulses are first amplified and compared against an adjustable threshold.
+Pulses above threshold are sent to timing circuitry implemented in a field programmable gate array (FPGA) chip.
+The first flash of the scintillator starts the timing system. If a second flash occurs within $20~\mu s$ of
+the first, the readout electronics measures the time between the two flashes and passes that time to the
+lifetime display software. If no second flash occurs within $20~\mu s$, the pulse is simply recorded as a
+charged particle that has passed through the detector. Communication circuitry transfers the data to our PC
+through USB port.
+
+\subsection{The Software}
+Data acquisition of muon decay times is computer controlled to eliminate the tedium of recording numbers
+and to permit extended data collection times. The decay time histogram is automatically updated with data
+from the readout electronics. Important display features like the histogram bin size and the logarithmic/linear
+axis type remain under user control. A password-protected built-in curve fitting algorithm allows for easy
+determination of the muon lifetime which is maintaining Dr. Juergen Reichenbacher. Raw data are written to
+disk files in a compact format so that we can export them to our own software package.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Experiments and Data Analysis}
+Measuring the muon lifetime using the TeachSpin apparatus is very straightforward. As we know that the muon lifetime is
+very short at rest or very low kinetic energy. But when it travels with very high energy it can stay longer
+in our reference frame because of the special relativity. In our atmosphere positive and negative muons can
+produce via the pions ($\pi^{\pm}$) decay [ref. eq. 1 and 2]. For my experiment, I collected two data sets. First data
+set was for only $186$ muon-decays, which was taken for $8100~s$ during my lab day. Then I left the experiment running for
+additional 7 days to collect large data for better statistics. The large data set was for 20582 muon-decay corresponding to $7.4$ days.
+
+Experimental main goal was to measure the mean muon lifetime in organic scintillator. The form for the decay time distribution
+for muons stopped in the scintillator is characteristic of the decay of radioactive substances with some background counts.
+\begin{eqnarray}
+&&\hspace*{0.0cm} N(t)=N_0~e^{\frac{-t}{\tau}}+B,
+\label{1eq:5}
+\end{eqnarray}
+Here, $N(t)$, $N_0$, $t$, $\tau$, and $B$ repersent final number of muons, initial number of muons at time $t=0$, time in $ns$,
+mean lifetime of muon, and background (free parameter), respectively.
+Additional background counts can be easily induced by bringing a 1 micro-Curie Cs-137 source close to the detector. In my case
+I did not counts additional background. After collecting the data for muon lifetime from the PC, I plotted the distribution of
+times between successive scintillator flashes using ROOT and a micro provided by Dr. Juergen Reichenbacher. I fitted the
+exponential-like distribution, equation $5$, to extract
+muon mean lifetime $\tau$.
+
+Figure 2a and 3a show the full distributions for 186, and 20582 muons lifetime, respectively. After fitting my data using simple
+function (eq. 5), I found the mean muon lifetime is $(1.915\pm 0.214) ~ \mu s$, which is shown in figure 2b. Also, for 20582 muon events,
+mean muon lifetime was $(2.092\pm0.022)~\mu s$, which is shown in fig. 3b. Specially, from fig. 3b with high statistic it is seen that the
+mean lifetime of muon is significantly less than the free space value $t=(2.197\pm0.001)~\mu s$, which correctly indicates the effect of
+nuclear capture of negative muons on $C-12$ nuclei.
+
+\begin{figure}[h!]
+  \centering
+  \subfloat[]{\includegraphics[width=90mm, height=70mm]{2a.eps}}
+   \hfill
+   \subfloat[]{\includegraphics[width=90mm, height=70mm]{2b.eps}}
+  \caption{Recorded histograms for 20582 muon-decay events (Michel electrons). (a) Raw data directly collected from the PC; (b) mean muon lifetime of
+  $(2.092\pm 0.0226)~\mu s$ after simple fit (eq. 5) and a constant background of $(9.649\pm 0.113)$.}
+  \label{1Fig:F3}
+\end{figure}
+
+\begin{figure}[t!]
+  \centering
+   \subfloat[]{\includegraphics[width=90mm, height=70mm]{1c.eps}}
+  \hfill
+  \subfloat[]{\includegraphics[width=90mm, height=70mm]{2c.eps}}
+  \caption{Recorded histograms for muon lifetime in organic scintillator fitting Eq.(6) to the Michel electron time distributions for (a) 186 muon-decay events; (b) 20582 muon-decay events.}
+  \label{1Fig:F4}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{eqnarray}
+&&\hspace*{0.0cm} N(t)=A~e^{\frac{-t}{2197~ns}}+B~e^{\frac{-t}{\tau_{\mu^-}}}+C,
+\label{1eq:6}
+\end{eqnarray}
+With this instrument, the muon lifetime measured in plastic scintillator is an average over negatively and positively charged muons. Negatively
+charged muons can undergo nuclear capture that slightly lessen their lifetime in matter. Therefore, using the lifetime of positive muons in carbon
+taken from the literature (tau = 2.197 ± 0.003 µsec), the sea-level charge ratio of positive to negative muons at low energy , Eµ = 200 MeV, can be easily determined.
+From eq.6, we can measure the negative muon lifetime by using $\mu^+=2197~ns$.
+From fig. 4, I found that the negative muon lifetime is 2192 (1807) $ns$ for total events number 186 (20582). My large data set is statistically rich (20582 events
+within 7.4 days). So, from fig. 4b I can measure the sea level charge ratio $\mu^+/\mu^-=1.4\pm0.006$.
+
+\section{Error Analysis and results}
+The fitted muon charge ratio for large data set is $1.4\pm0.006$, which is a bit higher than some published value $1.08\pm0.01$ (Ref. www.TeachSpin.com).
+To calculate the muon charge ratio I have used the below equation as:
+\begin{eqnarray}
+&&\hspace*{0.0cm} \frac{\mu^+}{\mu^-}=-\frac{\tau^-}{\tau^+}\times\frac{\tau^--\tau_{exp}}{\tau^+-\tau_{exp}},
+\label{1eq:7}
+\end{eqnarray}
+where, $\tau^-=(1807\pm160.9)~ns$, $\tau^+=(2197\pm0.007)~ns$, and $\tau_{exp}=(2058\pm26.48)~ns$. Here, $\tau_{exp}$
+is my experimentally observer muon average lifetime for large data set (figure 4b).
+Statistically, the result of $\tau_{exp}=(2058\pm26.48)~ns$ is excellent; simply by assuming a uniform distribution
+to represent any background interference, our fit gives a coefficient of
+determination $\chi^2$ value of nearly $1$—specifically $0.9373$. Without a doubt, our
+data demonstrate the exponential behavior of the muon decay distribution,
+validating the predicted theoretical behavior derived under the assumption
+of a uniform decay rate.
+
+\section{Conclusion}
+Muon is a fundamental natural particle. Muon study is very important part of particle physics and also, have lots of application in variety of sectors.
+Muon decay has great importance to study the week interaction, and also muon are using to detect dangerous nuclear materials. Muon's lifetime is well
+known. In this experiment, I measured the muon lifetime and their charge ratio in the see level by using the TeachSpin.com apparatus. Here, I used organic scintillator
+detector to measure the muon lifetime. When muons, produced in our Earth's atmosphere, enter into the detector and hit the scintillating material produce charged particle
+like electrons. In that way muon decay into the detector and creating charged particle which produce light. In the next step, photo-multiplier tube (PMT) can sense these
+light and amplify it to produce huge amount of electrons. And finally, send it as a voltage output. Then I collected the data from PC to measure the average muon lifetime.
+Form the above analysis about muon lifetime, I think this experiment was very helpful to understand the basic about the muon particle.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+
+
